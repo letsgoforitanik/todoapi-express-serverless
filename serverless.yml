@@ -1,0 +1,21 @@
+service: todo-api
+
+provider:
+    name: aws
+    region: ap-south-1
+    runtime: nodejs20.x
+    iam:
+        role:
+            statements:
+                - Effect: Allow
+                  Action: dynamodb:*
+                  Resource: "*"
+
+package:
+    exclude:
+        - src/**
+
+functions:
+    entrypoint:
+        handler: dist/index.handler
+        url: true
